@@ -14,6 +14,7 @@ except Exception as e:
     container_client = blob_service_client.create_container(container_name)
 
 app = Flask(__name__)  
+
 @app.route("/")
 def view_photos():
     blob_items = container_client.list_blobs() # list all the blobs in the container
@@ -67,3 +68,6 @@ def upload_file():
             print("Ignoring duplicate filenames") # ignore duplicate filenames
         
     return redirect('/')
+
+if __name__=="__main__":
+    app.run(host="0.0.0.0", port=8000)
